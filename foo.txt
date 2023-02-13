@@ -1,0 +1,4 @@
+Here is a C program to demonstrate the read function call on the Linux System.
+Write the below-command as it is in a new file. Add libraries,
+and in the main function, initialize a descriptor and size. The descriptor
+is opening the file, and size is used to read file data.
