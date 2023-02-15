@@ -6,7 +6,7 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:33:42 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/13 19:10:08 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:43:18 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,18 @@ NULL - there is nothing else to read, or an error occurred
 */
 char	*get_next_line(int fd)
 {
-	char *line;
-	int n;
+	static char	*storage;
+	char		*buffer;
+	char		*line;
+	int			n;
 
-	line = malloc(sizeof(*line + 1));
-	if (!line)
-		return (NULL);
-	while ((n = read(fd, line, 1)) > 0)
-		;
-	return (line);
+		buffer = malloc(sizeof(*line) * BUFFER_SIZE + 1);
+		if (!buffer)
+			return (NULL);
+	while (1)
+	{
+		read(fd, buffer, BUFFER_SIZE);
+		line[BUFFER_SIZE] = '\0';
+		return (line);
+	}
 }

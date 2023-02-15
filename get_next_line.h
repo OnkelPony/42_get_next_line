@@ -6,7 +6,7 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:34:39 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/13 19:27:03 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/15 13:24:49 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# define BUFFER_SIZE 42
 
 char	*get_next_line(int fd);
 
