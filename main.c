@@ -12,8 +12,8 @@ int	main(void)
 	// fd2 = open("foo.txt", O_RDONLY);
 	// sz = read(fd1, buf, 14);
 	printf("called get_next_line(%d), buf = %s\n", fd1, buf);
-	buf = get_next_line(fd1);
-	printf("called get_next_line(%d), buf = %s\n", fd1, buf);
+	// buf = get_next_line(fd1);
+	// printf("called get_next_line(%d), buf = %s\n", fd1, buf);
 	// sz = read(fd1, buf, 14);
 	// printf("called read(%d, buf, 10),returned that %d bytes were read\n", fd1,	sz);
 	// // sz = read(fd2, buf, 12);
