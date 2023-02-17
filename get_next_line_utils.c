@@ -6,7 +6,7 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:34:12 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/16 18:02:02 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/17 13:11:13 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ The terminating null byte is considered part of the string,
 so that if c is specified as '\0', these functions return a pointer
 to the terminator.
 */
-char    *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-        while (*s != c)
-        {
-                if (!*s++)
-                {
-                        return (NULL);
-                }
-        }
-        return ((char *)s);
+	while (*s != c)
+	{
+		if (!*s++)
+		{
+			return (NULL);
+		}
+	}
+	return ((char *)s);
 }
 
 /*
@@ -107,16 +107,16 @@ excluding the terminating null byte ('\0').
 str: String whose length is measured.
 Return: Number of bytes in the string.
 */
-size_t  ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-        const char      *p_str;
+	const char	*p_str;
 
-        p_str = str;
-        while (*p_str)
-        {
-                p_str++;
-        }
-        return (p_str - str);
+	p_str = str;
+	while (*p_str)
+	{
+		p_str++;
+	}
+	return (p_str - str);
 }
 
 /*
@@ -133,9 +133,9 @@ NULL if the allocation fails.
 */
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *substr;
-	char *p_substr;
-	size_t i;
+	char	*substr;
+	char	*p_substr;
+	size_t	i;
 
 	s += start;
 	p_substr = malloc(sizeof(*p_substr) * (len + 1));

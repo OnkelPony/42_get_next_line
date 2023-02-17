@@ -6,7 +6,7 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:34:39 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/16 18:02:36 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/17 15:18:09 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 1000
 
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *src);
