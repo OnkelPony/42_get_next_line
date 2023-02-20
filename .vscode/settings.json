@@ -1,0 +1,9 @@
+{
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/Users/slavkafranclikova/git/42Prague/002_Get_next_line/42_get_next_line",
+			"binaryPath": "/Users/slavkafranclikova/git/42Prague/002_Get_next_line/42_get_next_line/get_next_line",
+			"binaryArgs": []
+		}
+	]
+}

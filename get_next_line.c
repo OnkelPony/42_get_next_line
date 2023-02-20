@@ -6,7 +6,7 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:33:42 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/17 16:43:27 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:21:58 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*line_end;
 	// int			n;
-	
+
 	buffer = malloc(sizeof(*line) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
@@ -33,14 +33,14 @@ char	*get_next_line(int fd)
 	{
 		read(fd, buffer, BUFFER_SIZE);
 		line_end = ft_strchr(buffer, '\n');
-		printf("storage = %s\n", storage);
+		//printf("storage = %s\n", storage);
 		if (!line_end)
 		{
-			if (!storage)
-			{
-				storage = ft_strdup(buffer);
-			}
-			else
+			// if (!storage)
+			// {
+			// 	storage = ft_strdup(buffer);
+			// }
+			// else
 			{
 				storage = ft_strjoin(storage, buffer);
 			}

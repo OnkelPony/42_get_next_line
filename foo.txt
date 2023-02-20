@@ -1,5 +1,5 @@
-Yes, Here is a C program to demonstrate
-the read function call on the Linux System.
-Write the below-command as it is in a new file. Add libraries,
-and in the main function, initialize a descriptor and size. The descriptor
-is opening the file, and size is used to read file data.
+Žanna Němcovová: Nespekulujme, jak padne Putinův režim,
+ale připravme se na to, co pak budeme dělat
+Před osmi lety byl významný ruský opoziční politik
+Boris Němcov zavražděn nedaleko Kremlu.
+Jeho dcera Žanna od té doby žije v Evropě a vede
