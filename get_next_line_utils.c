@@ -6,7 +6,7 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:34:12 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/21 13:38:07 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:26:25 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ to the terminator.
 */
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != c)
+	unsigned char	u_c;
+
+	u_c = (unsigned char)c;
+	while (*s != u_c)
 	{
 		if (!*s++)
 		{
@@ -98,6 +101,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		*p_result++ = *s2++;
 	}
 	*p_result = '\0';
+	// free((char *)s1);
 	return (result);
 }
 

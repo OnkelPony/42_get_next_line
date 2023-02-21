@@ -6,66 +6,56 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:33:42 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/21 14:26:14 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/21 18:42:44 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_fill_storage(int fd, char *storage)
+static char	*ft_get_line(int fd, char *buffer, char *storage)
 {
-	char	*buffer;
-	int		bytes_got;
+	int		read_line;
+	char	*char_temp;
 
-	bytes_got = 108;
-	buffer = malloc(sizeof(*buffer) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
-	while (!ft_strchr(storage, '\n') && bytes_got != 0)
+	read_line = 1;
+	while (read_line != '\0')
 	{
-		bytes_got = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_got == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		buffer[bytes_got] = '\0';
-		storage = ft_strjoin(storage, buffer);
+		read_line = read(fd, buffer, BUFFER_SIZE);
+		if (read_line == -1)
+			return (0);
+		else if (read_line == 0)
+			break ;
+		buffer[read_line] = '\0';
+		if (!storage)
+			storage = ft_strdup("");
+		char_temp = storage;
+		storage = ft_strjoin(char_temp, buffer);
+		free(char_temp);
+		char_temp = NULL;
+		if (ft_strchr(buffer, '\n'))
+			break ;
 	}
-	free(buffer);
 	return (storage);
 }
 
-static char	*ft_get_line(char *storage)
+static char	*ft_extract(char *line)
 {
-	char	*line;
-	char	*newline_char;
+	size_t	count;
+	char	*storage;
 
-	newline_char = ft_strchr(storage, '\n');
-	if (!newline_char)
+	count = 0;
+	while (line[count] != '\n' && line[count] != '\0')
+		count++;
+	if (line[count] == '\0' || line[1] == '\0')
+		return (0);
+	storage = ft_substr(line, count + 1, ft_strlen(line) - count);
+	if (*storage == '\0')
 	{
-		line = strdup(storage);
+		free(storage);
+		storage = NULL;
 	}
-	else
-	{
-		line = ft_substr(storage, 0, (newline_char - storage));
-	}
-	return (line);
-}
-
-static char	*ft_get_rest(char *storage)
-{
-	char	*newline_char;
-
-	newline_char = ft_strchr(storage, '\n');
-	if (!newline_char)
-	{
-		return (strdup(storage));
-	}
-	else
-	{
-		return (strdup(newline_char + 1));
-	}
+	line[count + 1] = '\0';
+	return (storage);
 }
 
 /*
@@ -78,28 +68,18 @@ char	*get_next_line(int fd)
 {
 	static char	*storage;
 	char		*line;
+	char		*buffer;
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
-	{
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (0);
+	line = ft_get_line(fd, buffer, storage);
+	free(buffer);
+	// buffer = NULL;
+	if (!line)
 		return (NULL);
-	}
-	if (!storage)
-	{
-		printf("THIS MUST BE CALLED ONLY ONCE!\n");
-		storage = malloc(sizeof(*storage) * (BUFFER_SIZE + 1));
-		if (!storage)
-			return (NULL);
-		if (read(fd, storage, BUFFER_SIZE) == -1)
-			return (NULL);
-	}
-	// printf("storage = %s\n", storage);
-	storage = ft_fill_storage(fd, storage);
-	if (!storage)
-	{
-		return (NULL);
-	}
-	// printf("After ft_fill_storage: storage = %s\n", storage);
-	line = ft_get_line(storage);
-	storage = ft_get_rest(storage);
+	storage = ft_extract(line);
 	return (line);
 }

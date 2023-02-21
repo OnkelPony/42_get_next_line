@@ -6,11 +6,13 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 13:37:20 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/17 13:40:02 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/21 14:57:03 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
 
 int	main(void)
 {
