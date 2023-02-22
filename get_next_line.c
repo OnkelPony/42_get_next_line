@@ -6,7 +6,7 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:33:42 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/22 16:13:48 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/22 18:56:46 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ static char	*ft_get_rest(char *line)
 	char	*rest_of_line;
 
 	count = 0;
-	while (line[count] != '\n' && line[count])
+	while (line[count] && line[count] != '\n')
 		count++;
-	if (line[count] == '\0')
+	if (!line[count])
 		return (NULL);
 	rest_of_line = ft_substr(line, count + 1, ft_strlen(line) - count);
 	if (*rest_of_line == '\0')
