@@ -6,7 +6,7 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:34:12 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/21 18:26:25 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/22 14:40:24 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		*p_result++ = *s2++;
 	}
 	*p_result = '\0';
-	// free((char *)s1);
 	return (result);
 }
 

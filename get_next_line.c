@@ -6,56 +6,67 @@
 /*   By: jimartin <jimartin@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:33:42 by jimartin          #+#    #+#             */
-/*   Updated: 2023/02/21 18:42:44 by jimartin         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:13:48 by jimartin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+/*
+Reads string from file descriptor and writes it to the buffer. The buffer is
+then repeadtedly copied to the storage, till the newline char appears
+in the buffer.
+fd: File descriptor to read from.
+buffer: Buffer of certain size to write to.
+storage: Growing place to store contents of buffer.
+Return: Content of the storage.*/
 static char	*ft_get_line(int fd, char *buffer, char *storage)
 {
-	int		read_line;
-	char	*char_temp;
+	int		chars_read;
+	char	*p_storage;
 
-	read_line = 1;
-	while (read_line != '\0')
+	while (1)
 	{
-		read_line = read(fd, buffer, BUFFER_SIZE);
-		if (read_line == -1)
-			return (0);
-		else if (read_line == 0)
+		chars_read = read(fd, buffer, BUFFER_SIZE);
+		if (chars_read == -1)
+			return (NULL);
+		else if (chars_read == 0)
 			break ;
-		buffer[read_line] = '\0';
+		buffer[chars_read] = '\0';
 		if (!storage)
 			storage = ft_strdup("");
-		char_temp = storage;
-		storage = ft_strjoin(char_temp, buffer);
-		free(char_temp);
-		char_temp = NULL;
+		p_storage = storage;
+		storage = ft_strjoin(p_storage, buffer);
+		free(p_storage);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
 	return (storage);
 }
 
-static char	*ft_extract(char *line)
+/*
+Takes line including newlines and returns the part after the first newline.
+Changes its parameter to be the part before first newline.
+line: String including newlines.
+Retrun: String from parameter after the first newline.*/
+static char	*ft_get_rest(char *line)
 {
 	size_t	count;
-	char	*storage;
+	char	*rest_of_line;
 
 	count = 0;
-	while (line[count] != '\n' && line[count] != '\0')
+	while (line[count] != '\n' && line[count])
 		count++;
-	if (line[count] == '\0' || line[1] == '\0')
-		return (0);
-	storage = ft_substr(line, count + 1, ft_strlen(line) - count);
-	if (*storage == '\0')
+	if (line[count] == '\0')
+		return (NULL);
+	rest_of_line = ft_substr(line, count + 1, ft_strlen(line) - count);
+	if (*rest_of_line == '\0')
 	{
-		free(storage);
-		storage = NULL;
+		free(rest_of_line);
+		rest_of_line = NULL;
 	}
 	line[count + 1] = '\0';
-	return (storage);
+	return (rest_of_line);
 }
 
 /*
@@ -71,15 +82,14 @@ char	*get_next_line(int fd)
 	char		*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
+		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
-		return (0);
+		return (NULL);
 	line = ft_get_line(fd, buffer, storage);
 	free(buffer);
-	// buffer = NULL;
 	if (!line)
 		return (NULL);
-	storage = ft_extract(line);
+	storage = ft_get_rest(line);
 	return (line);
 }
